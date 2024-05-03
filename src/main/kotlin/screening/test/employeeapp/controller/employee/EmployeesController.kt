@@ -1,5 +1,8 @@
 package screening.test.employeeapp.controller.employee
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -29,6 +32,11 @@ class EmployeesController(
         val employee: EmployeeResponse = employeesService.findEmployeeById(id)?.toEmployeeResponse()!!
 
         return ResponseEntity.ok(employee)
+    }
+
+    @GetMapping("/triggerRead")
+    fun readFromCSV() {
+        CoroutineScope(Dispatchers.IO).launch { employeesService.readFile() }
     }
 }
 

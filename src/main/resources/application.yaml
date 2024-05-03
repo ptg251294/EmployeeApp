@@ -27,3 +27,6 @@ security:
     - /error
   admin-endpoints:
     - /api/employees**
+
+file:
+  path: /empdata.csv
